@@ -176,7 +176,7 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
   }
 
   const user = User.findByIdAndUpdate(req.user.id, newUserData,{
-    3.35.18
+    3.35:.18
   })
   sendToken(user, 200, res);
 });
