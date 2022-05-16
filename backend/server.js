@@ -7,11 +7,13 @@ const bodyParser = require('body-parser');
 //import routes
 const mobliepayRoute = require('./routes/mobilePayRoute');
 const cardpayRoute = require('./routes/cardPaymentRouter');
+const postRoutes = require('./routes/postsDelivery');
 
 //app middleware
 app.use(bodyParser.json());
 app.use(mobliepayRoute);
 app.use(cardpayRoute);
+app.use(postRoutes);
 
 //config
 dotenv.config({path:"backend/config/config.env"});
