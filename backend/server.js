@@ -1,6 +1,17 @@
 const app = require("./app");
+const express = require('express');
 const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
+const bodyParser = require('body-parser');
+
+//import routes
+const mobliepayRoute = require('./routes/mobilePayRoute');
+const cardpayRoute = require('./routes/cardPaymentRouter');
+
+//app middleware
+app.use(bodyParser.json());
+app.use(mobliepayRoute);
+app.use(cardpayRoute);
 
 //config
 dotenv.config({path:"backend/config/config.env"});
