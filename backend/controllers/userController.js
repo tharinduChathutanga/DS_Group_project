@@ -4,7 +4,7 @@ const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
-
+const cloudinary = require("cloudinary");
 //register user
 
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -168,15 +168,93 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 });
 
 // update User profile
-exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
-  
-  const newUserData={
-    name:req.body.name,
-    email:req.body.email,
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+  };
+
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+  res.status(200).json({
+    success: true,
+  });
+});
+
+//get all users - admin
+exports.getAllUser = catchAsyncErrors(async (req, res, next) => {
+  const users = await User.find();
+
+  res.status(200).json({
+    success: true,
+    users,
+  });
+});
+
+//get single user - admin
+exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHander(`User Dose not exist with Id: ${req.params.id}`)
+    );
   }
 
+ payment-management
   const user = User.findByIdAndUpdate(req.user.id, newUserData,{
-    3.35:.18
+
+
+
+    
+
   })
   sendToken(user, 200, res);
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+// update User role -- admin
+exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role,
+  };
+
+  const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+  if (!user) {
+    return next(new ErrorHander(`User dose not exist with id:{req.params.id}`));
+  }
+  res.status(200).json({
+    success: true,
+  });
+});
+
+// delete User  -- admin
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHander(`User does not exist with Id: ${req.params.id}`, 400)
+    );
+  }
+
+  await user.remove();
+
+  res.status(200).json({
+    success: true,
+    message: "User Deleted Successfully",
+  });
+
 });
