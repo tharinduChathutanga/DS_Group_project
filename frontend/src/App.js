@@ -28,6 +28,15 @@ import mobilepaydAdmin from "./component/Payment/mobilepaydAdmin";
 import mobilepaydetailsH from "./component/Payment/mobilepaydetailsH";
 import payEmail from "./component/Payment/payEmail";
 
+//Delivery Management
+import createDelivery from './component/Delivery/createDelivery';
+import deliveryDetails from './component/Delivery/deliveryDetails';
+import deliveryHome from './component/Delivery/deliveryHome';
+import editDelivery from './component/Delivery/editDelivery';
+import deliveryNavBar from './component/Delivery/deliveryNavBar';
+import deliveryEmailer from './component/Delivery/deliveryEmailer';
+
+
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   React.useEffect(() => {
@@ -60,6 +69,13 @@ function App() {
         <Route path="/emailP" component={payEmail}></Route>
         <Route path="/sucessP" component={sucessMobiP}></Route>
         <Route path="/payM" exact component={PaymentMethod}></Route>
+        <deliveryNavBar> </deliveryNavBar>
+        <deliveryEmailer></deliveryEmailer>
+        <Route path="/deliveryHome" exact component={deliveryHome}></Route>
+        <Route path="/add" exact component={createDelivery}></Route>
+        <Route path="/edit/:id" exact component={editDelivery}></Route>
+        <Route path="/post/:id" exact component={deliveryDetails}></Route>
+        <Route path="/email" exact component={deliveryEmailer}></Route>
 
       </Routes>
       <Footer />
