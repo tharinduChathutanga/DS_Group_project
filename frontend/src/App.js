@@ -19,6 +19,15 @@ import UpdateProfile from "./component/User/UpdateProfile";
 import ProtectedRoute from "./component/Route/ProtectedRoute";
 import Dashboard from "./component/Admin/Dashboard";
 
+//Payment management
+import mobilepayAdd from "./component/Payment/mobilepayAdd";
+import PaymentAddform from "./component/Payment/PaymentAddform";
+import PaymentMethod from "./component/Payment/PaymentMethod";
+import sucessMobiP from "./component/Payment/sucessMobiP";
+import mobilepaydAdmin from "./component/Payment/mobilepaydAdmin";
+import mobilepaydetailsH from "./component/Payment/mobilepaydetailsH";
+import payEmail from "./component/Payment/payEmail";
+
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   React.useEffect(() => {
@@ -33,7 +42,7 @@ function App() {
   return (
     <Router>
       <Header />
-      isAuthenticated && <UserOptions user={user} />}
+      isAuthenticated && <UserOptions user={user} />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/product/:id" element={<ProductDetails />} />
@@ -44,6 +53,14 @@ function App() {
         <Route exact path="/me/update" element={<UpdateProfile />} />
         <Route exact path="/login" element={<LoginSignUp />} />
         <Route exact path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/CardPay" component={PaymentAddform}></Route>
+        <Route path="/mobilePay" component={mobilepayAdd}></Route>
+        <Route path="/mobileDetailA/post/:id" component={mobilepaydAdmin}></Route>
+        <Route path="/mobilePHome" component={mobilepaydetailsH}></Route>
+        <Route path="/emailP" component={payEmail}></Route>
+        <Route path="/sucessP" component={sucessMobiP}></Route>
+        <Route path="/payM" exact component={PaymentMethod}></Route>
+
       </Routes>
       <Footer />
     </Router>
