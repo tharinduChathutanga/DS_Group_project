@@ -204,6 +204,11 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
     );
   }
 
+ payment-management
+  const user = User.findByIdAndUpdate(req.user.id, newUserData,{
+    
+  })
+  sendToken(user, 200, res);
   res.status(200).json({
     success: true,
     user,
@@ -247,4 +252,5 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     success: true,
     message: "User Deleted Successfully",
   });
+
 });

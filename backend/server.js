@@ -1,6 +1,18 @@
 const app = require("./app");
+const express = require('express');
 const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
+payment-management
+const bodyParser = require('body-parser');
+
+//import routes
+const mobliepayRoute = require('./routes/mobilePayRoute');
+const cardpayRoute = require('./routes/cardPaymentRouter');
+
+//app middleware
+app.use(bodyParser.json());
+app.use(mobliepayRoute);
+app.use(cardpayRoute);
 const cloudinary = require("cloudinary");
 
 //config
