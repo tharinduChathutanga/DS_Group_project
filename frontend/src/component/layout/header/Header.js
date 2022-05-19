@@ -19,8 +19,8 @@ const Header = () => {
       link2Text="Product"
       link3Text="Contact"
       link4Text="About"
-      link1Url="/home"
-      link2Url="/product"
+      link1Url="/"
+      link2Url="/products"
       link3Url="/contact"
       link4Url="/about"
       link1Size="1.2vmax"
@@ -36,6 +36,7 @@ const Header = () => {
       link3Margin="0"
       link4Margin="2vmax"
       profileIcon={true}
+      profileIconUrl="/login"
       ProfileIconElement={FaUserAlt}
       searchIcon={true}
       SearchIconElement={FaSearch}
